@@ -1,6 +1,9 @@
 # meet-php-fpm-healthcheck
 
 ```console
+$ echo 127.0.2.1 meet.localhost k3d-registry-meet.localhost \
+    | sudo tee --append /etc/hosts
+
 $ k3d registry create registry-meet.localhost \
     --port 5000
 
