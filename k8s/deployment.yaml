@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meet
+spec:
+  selector:
+    matchLabels:
+      name: meet
+  template:
+    metadata:
+      labels:
+        name: meet
+    spec:
+      containers:
+      - name: php-fpm
+        image: k3d-registry-meet.localhost:5000/wandersonwhcr/meet
+        ports:
+        - containerPort: 9000
+        livenessProbe:
+          exec:
+            command: ["php-fpm-healthcheck"]
+          initialDelaySeconds: 5
+          periodSeconds: 5
