@@ -17,4 +17,7 @@ $ docker tag wandersonwhcr/meet \
     k3d-registry-meet.localhost:5000/wandersonwhcr/meet
 
 $ docker push k3d-registry-meet.localhost:5000/wandersonwhcr/meet
+
+$ kubectl apply \
+    --filename k8s
 ```

@@ -12,12 +12,23 @@ spec:
         name: meet
     spec:
       containers:
-      - name: php-fpm
-        image: k3d-registry-meet.localhost:5000/wandersonwhcr/meet
-        ports:
-        - containerPort: 9000
-        livenessProbe:
-          exec:
-            command: ["php-fpm-healthcheck"]
-          initialDelaySeconds: 5
-          periodSeconds: 5
+        - name: php-fpm
+          image: k3d-registry-meet.localhost:5000/wandersonwhcr/meet
+          ports:
+            - containerPort: 9000
+          livenessProbe:
+            exec:
+              command: ["php-fpm-healthcheck"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+        - name: nginx
+          image: nginx:1.19
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: meet-nginx-templates
+              mountPath: /etc/nginx/templates
+      volumes:
+        - name: meet-nginx-templates
+          configMap:
+            name: meet-nginx-templates
